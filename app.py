@@ -236,6 +236,9 @@ def projects():
         
         projects_html += f"""
         <div class="project-card">
+            <div class="project-image">
+                <img src="/static/images/{image_filename}" alt="{title}" class="project-img">
+            </div>
             <div class="project-content">
                 <h3>{title}</h3>
                 <p class="project-description">{description}</p>
