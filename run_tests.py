@@ -18,13 +18,13 @@ def run_command(command, description):
     
     try:
         result = subprocess.run(command, shell=True, check=True, capture_output=True, text=True)
-        print("✅ SUCCESS")
+        print("SUCCESS")
         if result.stdout:
             print("Output:")
             print(result.stdout)
         return True
     except subprocess.CalledProcessError as e:
-        print("❌ FAILED")
+        print("FAILED")
         print(f"Error: {e}")
         if e.stdout:
             print("Output:")
@@ -37,12 +37,12 @@ def run_command(command, description):
 
 def main():
     """Main test runner function"""
-    print("🧪 Flask Portfolio Website - Test Runner")
+    print("Flask Portfolio Website - Test Runner")
     print("=" * 60)
     
     # Check if we're in the right directory
     if not os.path.exists('app.py'):
-        print("❌ Error: app.py not found. Please run this script from the project root directory.")
+        print("Error: app.py not found. Please run this script from the project root directory.")
         sys.exit(1)
     
     # Check if pytest is installed
@@ -50,7 +50,7 @@ def main():
         subprocess.run(['python', '-m', 'pytest', '--version'], 
                       check=True, capture_output=True)
     except subprocess.CalledProcessError:
-        print("❌ Error: pytest not installed. Please install test requirements:")
+        print("Error: pytest not installed. Please install test requirements:")
         print("pip install -r test_requirements.txt")
         sys.exit(1)
     
@@ -77,10 +77,10 @@ def main():
     print(f"Tests passed: {tests_passed}/{total_tests}")
     
     if tests_passed == total_tests:
-        print("🎉 All tests passed!")
+        print("All tests passed!")
         return 0
     else:
-        print("❌ Some tests failed!")
+        print("Some tests failed!")
         return 1
 
 

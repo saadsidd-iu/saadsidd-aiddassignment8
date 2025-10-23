@@ -6,8 +6,12 @@ Tests routes, forms, and web interface components
 import pytest
 import tempfile
 import os
-from app import app, dal
+import sys
 from DAL import DatabaseAccessLayer
+
+# Import app after setting up the path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from app import app, dal
 
 
 class TestFlaskApp:
@@ -27,8 +31,8 @@ class TestFlaskApp:
         app.config['WTF_CSRF_ENABLED'] = False  # Disable CSRF for testing
         
         # Replace the global dal with test dal
-        import app
-        app.dal = self.test_dal
+        import app as app_module
+        app_module.dal = self.test_dal
         
         self.client = app.test_client()
     
