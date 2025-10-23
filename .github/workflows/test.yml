@@ -12,7 +12,7 @@ jobs:
     
     strategy:
       matrix:
-        python-version: [3.9, 3.10, 3.11]
+        python-version: ['3.9', '3.10', '3.11']
     
     steps:
     - name: Checkout code
@@ -35,8 +35,15 @@ jobs:
       run: |
         python -m pytest --cov=. --cov-report=xml --cov-report=html --html=report.html --self-contained-html -v
     
+    - name: List generated files
+      run: |
+        echo "Generated files:"
+        ls -la *.html *.xml || echo "No HTML/XML files found"
+        ls -la htmlcov/ || echo "No htmlcov directory found"
+    
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
+      if: always()
       with:
         file: ./coverage.xml
         flags: unittests
@@ -52,3 +59,4 @@ jobs:
           report.html
           htmlcov/
           coverage.xml
+        if-no-files-found: warn
