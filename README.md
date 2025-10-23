@@ -1,145 +1,243 @@
-# Portfolio Website - Assignment 7
+# Saad Siddique - Portfolio Website
 
-A modern, responsive portfolio website built with Flask and SQLite database integration.
+A professional Flask-based portfolio website showcasing projects, skills, and experience. This project demonstrates modern web development practices with Docker containerization, automated testing, and CI/CD integration.
 
-## Features
+## 🚀 Live Demo
+
+The website is containerized and can be run locally or deployed to any Docker-compatible platform.
+
+## ✨ Features
 
 - **Responsive Design**: Modern, mobile-friendly interface
-- **Database Integration**: SQLite database with Data Access Layer (DAL)
-- **Project Management**: Add, view, and manage portfolio projects
-- **PDF Viewers**: Embedded PDF viewers for resume and project documents
-- **Contact Form**: Functional contact form with validation
-- **Dynamic Content**: Database-driven project display
+- **Database-Driven**: SQLite database for dynamic project management
+- **Docker Support**: Fully containerized for easy deployment
+- **Automated Testing**: Comprehensive test suite with GitHub Actions
+- **Form Handling**: Contact form with validation
+- **PDF Integration**: Resume viewer with PDF support
+- **Professional UI**: Clean, modern design with custom CSS
 
-## Technology Stack
+## 🛠️ Technology Stack
 
 - **Backend**: Python Flask
-- **Database**: SQLite with custom DAL
+- **Database**: SQLite with custom DAL (Data Access Layer)
 - **Frontend**: HTML5, CSS3, JavaScript
 - **Forms**: Flask-WTF with WTForms
-- **Styling**: Custom CSS with responsive grid layout
+- **Containerization**: Docker & Docker Compose
+- **Testing**: pytest with coverage reporting
+- **CI/CD**: GitHub Actions
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 ├── app.py                 # Main Flask application
-├── DAL.py                 # Data Access Layer for database operations
+├── DAL.py                 # Database Access Layer
 ├── init_database.py       # Database initialization script
-├── projects.db            # SQLite database file
 ├── requirements.txt       # Python dependencies
-├── static/
-│   ├── css/
-│   │   └── style.css      # Custom stylesheet
-│   ├── images/            # Project images
-│   └── *.pdf             # Resume and project documents
-└── README.md             # This file
+├── test_requirements.txt  # Testing dependencies
+├── Dockerfile            # Docker configuration
+├── docker-compose.yml    # Docker Compose setup
+├── .github/workflows/    # GitHub Actions workflows
+├── static/               # Static assets (CSS, images, PDFs)
+├── test_*.py            # Test files
+└── README.md            # This file
 ```
 
-## Installation & Setup
+## 🚀 Quick Start
 
-1. **Clone the repository**
+### Option 1: Docker (Recommended)
+
+1. **Clone the repository**:
    ```bash
-   git clone https://github.com/saadsidd-iu/AiDD-assignment-7-saad-siddique.git
-   cd AiDD-assignment-7-saad-siddique
+   git clone https://github.com/saadsidd-iu/saadsidd-aiddassignment8.git
+   cd saadsidd-aiddassignment8
    ```
 
-2. **Install dependencies**
+2. **Run with Docker Compose**:
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **Access the website**:
+   Open http://localhost:5000 in your browser
+
+### Option 2: Local Development
+
+1. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Initialize the database**
+2. **Initialize the database**:
    ```bash
    python init_database.py
    ```
 
-4. **Run the application**
+3. **Run the application**:
    ```bash
    python app.py
    ```
 
-5. **Access the website**
-   Open your browser and navigate to `http://localhost:5000`
+4. **Access the website**:
+   Open http://localhost:5000 in your browser
 
-## Database Schema
+## 🧪 Testing
 
-### Projects Table
-- `id` (INTEGER, PRIMARY KEY, AUTOINCREMENT)
-- `title` (TEXT, NOT NULL)
-- `description` (TEXT, NOT NULL)
-- `image_filename` (TEXT, NOT NULL)
-- `created_date` (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
-- `updated_date` (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+The project includes a comprehensive testing suite:
 
-## Usage
-
-### Adding Projects
-1. Navigate to the "Add Project" page
-2. Fill in the project details
-3. Select an image from the available images in `static/images/`
-4. Submit the form
-
-### Managing Images
-- Add new images by placing them in the `static/images/` folder
-- Supported formats: JPG, PNG, GIF, BMP, WEBP
-- Refresh the "Add Project" page to see new images in the dropdown
-
-### Database Operations
-The DAL (Data Access Layer) provides methods for:
-- `add_project(title, description, image_filename)`
-- `get_all_projects()`
-- `get_project_by_id(project_id)`
-- `update_project(project_id, title, description, image_filename)`
-- `delete_project(project_id)`
-- `get_available_images()`
-
-## Pages
-
-- **Home** (`/`): Welcome page with overview
-- **About** (`/about`): Professional background and skills
-- **Resume** (`/resume`): PDF viewer with resume
-- **Projects** (`/projects`): Database-driven project portfolio
-- **Add Project** (`/add-project`): Form to add new projects
-- **Contact** (`/contact`): Contact information and form
-
-## Development
-
-### Database Management
-```python
-from DAL import dal
-
-# Add a new project
-project_id = dal.add_project("Project Title", "Description", "image.jpg")
-
-# Get all projects
-projects = dal.get_all_projects()
-
-# Get specific project
-project = dal.get_project_by_id(1)
+### Run All Tests
+```bash
+python run_tests.py
 ```
 
-### Adding New Features
-1. Modify `app.py` for new routes
-2. Update `DAL.py` for database operations
-3. Add styles to `static/css/style.css`
-4. Test thoroughly before committing
+### Run Specific Test Categories
+```bash
+# Database tests
+python -m pytest test_database.py -v
 
-## License
+# Application tests
+python -m pytest test_app.py -v
+
+# Integration tests
+python -m pytest test_integration.py -v
+```
+
+### Run with Coverage
+```bash
+python -m pytest --cov=. --cov-report=html
+```
+
+## 🐳 Docker Management
+
+Use the included management script for easy Docker operations:
+
+```bash
+# Windows PowerShell
+.\docker-manage.ps1
+
+# Or use Docker commands directly
+docker-compose up -d    # Start
+docker-compose down     # Stop
+docker-compose logs     # View logs
+```
+
+## 📊 GitHub Actions
+
+The repository includes automated CI/CD with GitHub Actions:
+
+- **Automated Testing**: Runs on every push and pull request
+- **Multi-Version Support**: Tests Python 3.9, 3.10, 3.11
+- **Coverage Reporting**: Tracks test coverage over time
+- **Artifact Storage**: Saves test reports and coverage data
+
+## 🗄️ Database Schema
+
+The application uses a simple SQLite database with the following schema:
+
+```sql
+CREATE TABLE projects (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    image_filename TEXT NOT NULL,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+## 📝 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | Home page |
+| GET | `/about` | About page |
+| GET | `/projects` | Projects portfolio |
+| GET | `/resume` | Resume page |
+| GET | `/contact` | Contact form |
+| POST | `/contact` | Submit contact form |
+| GET | `/add-project` | Add project form |
+| POST | `/add-project` | Submit project form |
+| GET | `/static/<path>` | Static file serving |
+
+## 🎨 Customization
+
+### Adding New Projects
+1. Add images to `static/images/`
+2. Use the web form at `/add-project`
+3. Or add directly via the database
+
+### Styling
+- Main stylesheet: `static/css/style.css`
+- Responsive design with CSS Grid and Flexbox
+- Custom fonts and color scheme
+
+### Content Updates
+- Edit `app.py` for page content
+- Update `init_database.py` for sample data
+- Modify templates in the route functions
+
+## 🔧 Development
+
+### Prerequisites
+- Python 3.9+
+- Docker (optional)
+- Git
+
+### Setup Development Environment
+```bash
+# Clone repository
+git clone https://github.com/saadsidd-iu/saadsidd-aiddassignment8.git
+cd saadsidd-aiddassignment8
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+pip install -r test_requirements.txt
+
+# Initialize database
+python init_database.py
+
+# Run tests
+python run_tests.py
+
+# Start development server
+python app.py
+```
+
+## 📈 Performance
+
+- **Lightweight**: Minimal dependencies
+- **Fast Loading**: Optimized static assets
+- **Responsive**: Mobile-first design
+- **Scalable**: Docker-ready for production
+
+## 🔒 Security
+
+- CSRF protection on forms
+- Input validation and sanitization
+- Secure file handling
+- Environment variable configuration
+
+## 📄 License
 
 This project is part of an academic assignment and is for educational purposes.
 
-## Author
+## 👨‍💻 Author
 
 **Saad Siddique**
 - GitHub: [@saadsidd-iu](https://github.com/saadsidd-iu)
-- Repository: [AiDD-assignment-7-saad-siddique](https://github.com/saadsidd-iu/AiDD-assignment-7-saad-siddique)
+- LinkedIn: [saadhsiddique](https://www.linkedin.com/in/saadhsiddique/)
 
-## Assignment Details
+## 🤝 Contributing
 
-This project fulfills the requirements for Assignment 7, demonstrating:
-- Flask web application development
-- SQLite database integration
-- Data Access Layer implementation
-- Form handling and validation
-- Responsive web design
-- CRUD operations for project management
+This is an academic project, but suggestions and improvements are welcome!
+
+## 📞 Contact
+
+For questions or collaboration opportunities, please use the contact form on the website or reach out via LinkedIn.
+
+---
+
+**Built with ❤️ using Flask, Docker, and modern web technologies**
